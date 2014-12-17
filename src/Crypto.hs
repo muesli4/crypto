@@ -30,3 +30,13 @@ factors n = go n 2
            | m `rem` d == 0 = d : go (m `quot` d) d
            | otherwise      = go m (d + 1)
 
+coprime :: Integral i => i -> i -> Bool
+coprime x y = gcd x y == 1
+
+totatives :: Integral i => i -> [i]
+totatives n | n < 2     = [1]
+            | otherwise = [ t | t <- [1 .. n - 1], coprime t n ]
+
+totient :: Integral i => i -> i
+totient = fromIntegral . length . totatives
+
