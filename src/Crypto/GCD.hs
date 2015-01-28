@@ -1,8 +1,9 @@
 {-# LANGUAGE BangPatterns #-}
 module Crypto.GCD where
 
--- | Uses the advanced euclidian algorithm to compute numbers /(x, s, y, t)/ for
--- which /gcd = x * s + y * t/.
+-- | Uses the advanced euclidian algorithm to compute numbers
+-- /(max x y, s, min x y, t)/ for which
+-- /gcd (max x y) (min x y) == (max x y) * s + (min x y) * t/.
 egcd :: (Ord a, Integral a) => a -> a -> (a, a, a, a)
 egcd x y | x < y     = init y x
          | otherwise = init x y
