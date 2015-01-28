@@ -20,7 +20,7 @@ sortBySndDesc :: Ord b => [(a, b)] -> [(a, b)]
 sortBySndDesc = sortBy (flip compare `on` snd)
 
 -- | Computes all factors to a given positive number (excluding 1).
-factors :: Int -> [Int]
+factors :: Integral i => i -> [i]
 factors n = go n 2
   where
     max                     = n `quot` 2
@@ -29,6 +29,9 @@ factors n = go n 2
     go m d | d > max        = [m]
            | m `rem` d == 0 = d : go (m `quot` d) d
            | otherwise      = go m (d + 1)
+
+prime :: Integral i => i -> Bool
+prime n = factors n == [n]
 
 coprime :: Integral i => i -> i -> Bool
 coprime x y = gcd x y == 1
